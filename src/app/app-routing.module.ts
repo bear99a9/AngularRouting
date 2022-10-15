@@ -65,7 +65,7 @@ const appRoutes: Routes = [
         //In older browsers you can mimic a similar behavior by using hashes for internal navigation on a page.
 
         // This would be the same if you would write your app in plain JavaScript and not in Angular.
-        //         RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes)
 
     ],
     exports: [RouterModule]
