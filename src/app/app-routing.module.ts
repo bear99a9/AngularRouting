@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth-guard.service';
 import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
+import { ServerResolver } from './servers/server/server-resolver.service';
 
 const appRoutes: Routes = [
     {
@@ -22,12 +23,12 @@ const appRoutes: Routes = [
         canActivateChild: [AuthGuard],
         component: ServersComponent, children: [
             { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard] },
-            { path: ':id', component: ServerComponent },
+            { path: ':id', component: ServerComponent, resolve: { server: ServerResolver } },
         ]
     },
     { path: '', component: HomeComponent },
     //{ path: 'not-found', component: PageNotFoundComponent },
-    { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+    { path: 'not-found', component: ErrorPageComponent, data: { message: 'Page not found!' } },
     { path: '**', redirectTo: '/not-found' } // needs to be last route as routes parsed from top to bottom
 ];
 // In our example, we didn't encounter any issues when we tried to redirect the user. But that's not always the case when adding redirections.
